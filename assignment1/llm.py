@@ -12,12 +12,17 @@ client = OpenAI(
     base_url=base_url,
     api_key=api_key,
 )
-print("model:", model)
-print("base_url:", base_url)
-print("model:", model)
-print("base_url:", base_url)
-response = client.chat.completions.create(
-    model=model, messages=[{"role": "user", "content": "Hello, how are you?"}]
-)
 
-print(response.choices[0].message.content)
+
+def llm(user_input):
+    response = client.chat.completions.create(
+        model=model,
+        messages=[
+            {
+                "role": "system",
+                "content": "You are a helpful chat assistant. Keep responses to 1-2 sentences.",
+            },
+            {"role": "user", "content": user_input},
+        ],
+    )
+    return response.choices[0].message.content
