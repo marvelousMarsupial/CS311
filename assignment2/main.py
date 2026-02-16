@@ -6,14 +6,14 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error
 CSV = "src/data/daily_csv.csv"
 df = pd.read_csv(CSV)
 
-# choose target column
+# target column
 target = next((c for c in df.columns if c.strip().lower() in ("close", "price")), None)
 if target is None:
     target = df.select_dtypes("number").columns[-1]
 
 y = df[target].astype(float)
 
-# stats output
+# stats
 print("Dataset:", CSV)
 print("Target:", target)
 print("Rows:", len(df))

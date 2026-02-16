@@ -14,8 +14,7 @@ def embed(data):
 
     if os.path.exists(chroma_path):
         return Chroma(persist_directory=chroma_path, embedding_function=embeddings)
-
-    loader = TextLoader(data)
+    loader = TextLoader(data, encoding="utf-8")
     docs = loader.load()
     splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)
     chunks = splitter.split_documents(docs)
