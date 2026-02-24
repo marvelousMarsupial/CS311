@@ -209,8 +209,12 @@ cython_debug/
 
 # Marimo
 marimo/_static/
-marimo/_lsp/
+marimo/_lsp/i
 __marimo__/
 
 # Streamlit
-.streamlit/secrets.toml
+i.streamlit/secrets.toml
+
+# chroma
+chroma_db/
+chroma_d/
