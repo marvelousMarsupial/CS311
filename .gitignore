@@ -218,3 +218,6 @@ i.streamlit/secrets.toml
 # chroma
 chroma_db/
 chroma_d/
+
+
+
