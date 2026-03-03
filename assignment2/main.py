@@ -1,19 +1,24 @@
+# Imports
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_absolute_error, mean_squared_error
 
+# Geting the data file
 CSV = "src/data/daily_csv.csv"
 target = "price"
 
+# Putting it in a data frame
 df = pd.read_csv(CSV)
 y = df[target].astype(float)
 
+# Printing the data information
 print("Dataset:", CSV)
 print("Target:", target)
 print("Rows:", len(df))
 print("Target stats:\n", y.describe().round(4))
 
+# Doing the training
 data = pd.DataFrame({f"lag{i}": y.shift(i) for i in range(1, 8)})
 data["y"] = y
 data = data.dropna()
@@ -31,6 +36,7 @@ pred = m.predict(X_test)
 mae = mean_absolute_error(y_test, pred)
 rmse = mean_squared_error(y_test, pred, squared=False)
 
+# Printing the training info
 print("Train/Test:", len(train), "/", len(test))
 print("MAE:", mae)
 print("RMSE:", rmse)
@@ -38,6 +44,7 @@ print("RMSE:", rmse)
 tomorrow = m.predict(data.iloc[[-1]].drop(columns="y"))[0]
 print("Tomorrow prediction:", tomorrow)
 
+# Creating the chart
 plt.plot(y_test.index, y_test.values, label="Actual")
 plt.plot(y_test.index, pred, label="Predicted")
 plt.title("Actual vs Predicted (test split)")
