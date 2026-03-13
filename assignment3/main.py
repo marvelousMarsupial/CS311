@@ -37,5 +37,5 @@ for ep in range(500):
     rewards.append(total_r)
     if ep % 50 == 0:
         print(
-            f"Episode {ep:4d} | Avg Reward (last 50): {np.mean(rewards[-50:]):6.1f} | Eps: {eps:.3f}"
+            f"Episode {ep:4d} | Avg Reward last 50: {np.mean(rewards[-50:]):6.1f} | Eps: {eps:.3f}"
         )
