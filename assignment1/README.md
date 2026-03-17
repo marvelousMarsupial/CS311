@@ -17,7 +17,7 @@ to simply chat with an LLM that understands the parameters and steps
 outlined in the FAQ. The process of giving AI context of data is called
 Retrieval Augmented Generation (RAG). When using an LLM the model has
 training information, but that information could be incomplete or
-inaccurate. Additionally, LLM's are known to hallucinate i.e. provide a
+inaccurate. Additionally, LLM’s are known to hallucinate i.e. provide a
 confident answer that is essentially made up. RAG systems allow the LLM
 to reference accurate and up to date documentation. The question can be
 made in natural language instead of looking through documentation and
@@ -71,7 +71,7 @@ the question and passed to the API giving the model the ability to have
 much more insight into the answer. Text Embedding works similarly to
 LLMs in the sense that an embedding model is needed. A helpful way to
 think of it like a reverser LLM although that is not entirely accurate
-and more of an analogy. Conveniently the embedding models don't need as
+and more of an analogy. Conveniently the embedding models don’t need as
 many resources to get quite good results. For this project
 all-MiniLM-L6-v2 was chosen. It is a good model for a project of this
 scale because it is lightweight and fast. It is very supported with
@@ -94,7 +94,7 @@ accessible online. This is a benefit of the project because it could
 work with local or over the internet based APIs.
 
 The final method used in this project is text chunking. Text chunking is
-needed because plain text can't be directly fed into the embedding
+needed because plain text can’t be directly fed into the embedding
 system. The embedding model is only able to handle chunks of text about
 the size of a sentence. If too much text is sent to the embedding model
 it will truncate the text and it will not be included. Missing text
@@ -112,7 +112,7 @@ model there is no API instead a python library interacts with the model.
 Dataset Information
 
 The source of the persistent data used in the RAG pipeline was the
-manufacturer's website. The website had a
+manufacturer’s website. The website had a
 [FAQ](https://www.mi.com/global/support/faq/details/KA-509528/) that was
 used as the data. To count the number of records simply counted the
 number of chunks in the ChromaDB once the embedding was completed. The
@@ -163,7 +163,7 @@ with multiple moving parts instead of a primitive chat with the LLM. It
 can facilitate passing information to the LLM as well as allowing it to
 interact with tools and things like that. This project only scratched
 the surface of its capabilities. However model context protocol is a
-more contemporary alternative for many of LangChain's capabilities.
+more contemporary alternative for many of LangChain’s capabilities.
 
 ChromaDB is a persistent vector store for keeping and searching
 vectorized chunks of data. Langchain can interact with it and make
@@ -184,13 +184,13 @@ OpenAI Python client is a wrapper that allows python to interact with
 LLM APIs. OpenAI the creators of ChatGPT created the OpenAI API and it
 became the current standard for LLM APIs. This python library allows
 python programs to interact with LLMs over the internet via the API.
-It's a convenient library to use because it only takes one function call
+It’s a convenient library to use because it only takes one function call
 assigned to a variable and the program can start piping data to the LLM
 and getting responses.
 
 Lastly Streamlit is a web app UI library for a LLM chat interface. It
 should not be used in production applications but for projects like this
-it's a spectacular tool to spin up a quick UI to interact with LLMs. It
+it’s a spectacular tool to spin up a quick UI to interact with LLMs. It
 really was a pleasure to use because it only took a few lines of code to
 get a working UI and a few small modifications to the TOML config file
 and the interface was exactly how it should be for ease of use.
@@ -202,27 +202,27 @@ is quite clean and modular yet it gets a lot done. At a high level it
 represents a flow of data from the boring FAQ to the structured,
 formatted and hype-specific LLM output. The architecture flows from the
 original text FAQ through sanitization which removes characters that
-can't be chunked and stored in the database. Next it and its embeddings
+can’t be chunked and stored in the database. Next it and its embeddings
 are stored in the ChromaDB. Once the user presents a query it is
 compared to the embeddings in the database to look for similarity. The
 original question and any relevant data is passed to the LLM in
 formatted manner so it can tell the question from the context. And
-finally the LLM's response is received and passed to the user as a final
+finally the LLM’s response is received and passed to the user as a final
 output. This is how the data flow through the pipeline to facilitate
 RAG.
 
-![](.\assignment1\media/media/image1.png){width="5.575in"
-height="5.412239720034996in"}
+<img src=".\assignment1/media/image1.png"
+style="width:5.575in;height:5.41224in" />
 
 The code is broken up into four files that each accomplish different
 steps in the process. First is the embeddings.py which contains two
 functions. One to sanitize chunk and embed the data. And the second to
-query the database with the user's question. The llm.py file handles
-calling the openAI API and passing it the user's data. It contains one
+query the database with the user’s question. The llm.py file handles
+calling the openAI API and passing it the user’s data. It contains one
 function called llm() that facilitates this. It includes the system
 prompt that tells the LLM that it needs to respond and to keep responses
 short. Thes functions are called from the app.py and the main.py. These
-allow either the UI or the CLI interface depending on the user's
+allow either the UI or the CLI interface depending on the user’s
 preference. Both main.py and app.py check if the database exists and if
 not they create it using the provided data. The project contains a fair
 amount of configuration that is handled by the various config files.
@@ -254,10 +254,10 @@ the following values.
 
 - CHROMA_PATH: File path to the vector database
 
-![](.\assignment1\media/media/image2.png){width="6.250872703412074in"
-height="3.2817082239720037in"}
+<img src=".\assignment1/media/image2.png"
+style="width:6.25087in;height:3.28171in" />
 
-Here is what the configuration looked like. Keep in mind it's not a one
+Here is what the configuration looked like. Keep in mind it’s not a one
 size fits all. To begin with only the LLM info needs to be provided
 unless the user wants a custom implementation. The rest will fill itself
 in if nothing custom is selected. The project is technically modular so
@@ -265,10 +265,10 @@ it could be pointed at a different text file of data. Also, a different
 embeddings model could be used if preferred.
 
 The project has two user interfaces a CLI and a UI. Simply run the
-main.py to use the cli interface to talk to the model or run "streamlit
-run app.py" to use the web app version. When using the UI version, the
+main.py to use the cli interface to talk to the model or run “streamlit
+run app.py” to use the web app version. When using the UI version, the
 command will open the browser, and a chat UI will be visible. If the
-browser doesn't launch, simply open it and navigate to the URL displayed
+browser doesn’t launch, simply open it and navigate to the URL displayed
 in the terminal. If the cli is preferred just run the main.py file and
 chat right in the terminal. The user can then ask the chat bot questions
 pertaining to the product FAQ.
@@ -290,8 +290,8 @@ however, seems to not reference the FAQ and the LLM answered based off
 its knowledge, which is important to note the limits of this kind of
 technology.
 
-![](.\assignment1\media/media/image3.png){width="6.5in"
-height="3.254166666666667in"}
+<img src=".\assignment1/media/image3.png"
+style="width:6.5in;height:3.25417in" />
 
 Insights
 
@@ -309,10 +309,10 @@ is plain text instead of tables or some kind of structured data. There
 is also a trade off with the sizes of the chunks of text. If the chunks
 are too small context is lost but if the chunks of text are too large
 the information becomes noisy. The shortcoming of the CLI interface is
-it doesn't maintain a conversation memory. That problem is solved by the
+it doesn’t maintain a conversation memory. That problem is solved by the
 UI. Lastly for production or serious use a more powerful model would be
 a better fit. The local LLM is perfect for building the RAG pipeline,
-but it doesn't have the most powerful intelligence.
+but it doesn’t have the most powerful intelligence.
 
 There are some potential improvements that could be made on the project.
 First a different data source could be used instead. It could be a CSV
