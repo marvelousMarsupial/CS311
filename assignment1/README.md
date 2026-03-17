@@ -211,8 +211,7 @@ finally the LLM’s response is received and passed to the user as a final
 output. This is how the data flow through the pipeline to facilitate
 RAG.
 
-<img src=".\assignment1/media/image1.png"
-style="width:5.575in;height:5.41224in" />
+![](./media/image1.png)
 
 The code is broken up into four files that each accomplish different
 steps in the process. First is the embeddings.py which contains two
@@ -254,8 +253,7 @@ the following values.
 
 - CHROMA_PATH: File path to the vector database
 
-<img src=".\assignment1/media/image2.png"
-style="width:6.25087in;height:3.28171in" />
+![](./media/image2.png)
 
 Here is what the configuration looked like. Keep in mind it’s not a one
 size fits all. To begin with only the LLM info needs to be provided
@@ -290,8 +288,7 @@ however, seems to not reference the FAQ and the LLM answered based off
 its knowledge, which is important to note the limits of this kind of
 technology.
 
-<img src=".\assignment1/media/image3.png"
-style="width:6.5in;height:3.25417in" />
+![](./media/image3.png)
 
 Insights
 
@@ -337,3 +334,4 @@ Retrieved February 24, 2026, from
 
 Xiaomi. (n.d.). Redmi Buds 6 FAQ. Retrieved February 24, 2026, from
 https://www.mi.com/global/support/faq/details/KA-509528/
+
